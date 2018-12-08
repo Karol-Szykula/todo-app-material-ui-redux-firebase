@@ -18,6 +18,10 @@ export const initAuthChangeListeningAsyncAction = () => (dispatch, getState) => 
     )
 }
 
+export const signInAsyncAction = () => (dispatch, getState) => {
+    // auth.
+}
+
 export const logOutAsyncAction = () => (dispatch, getState) => {
     auth.signOut()
 }
@@ -57,6 +61,7 @@ export const emailChangeAction = newValue => ({
     type: EMAIL_CHANGE,
     newValue
 })
+
 export const passwordChangeAction = newValue => ({
     type: PASSWORD_CHANGE,
     newValue

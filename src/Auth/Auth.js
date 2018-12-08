@@ -11,6 +11,7 @@ import {
   passwordChangeAction,
   resetPasswordAsyncAction
 } from '../state/auth'
+import RegistrationForm from './RegistrationForm';
 
 class Auth extends React.Component {
   componentDidMount() {
@@ -24,15 +25,20 @@ class Auth extends React.Component {
           {this.props.children}
         </div>
         :
-        <LoginForm
-          email={this.props._email}
-          onEmailChangeHandler={this.props._emailChangeAction}
-          password={this.props._password}
-          onPasswordChangeHandler={this.props._passwordChangeAction}
-          onLogInClick={this.props._logInAsyncAction}
-          onLogInByGoogleClick={this.props._logInByGoogleAsyncAction}
-          onPasswordReset={this.props._passwordResetAsyncAction}
-        />
+        <div>
+          <LoginForm
+            email={this.props._email}
+            onEmailChangeHandler={this.props._emailChangeAction}
+            password={this.props._password}
+            onPasswordChangeHandler={this.props._passwordChangeAction}
+            onLogInClick={this.props._logInAsyncAction}
+            onLogInByGoogleClick={this.props._logInByGoogleAsyncAction}
+            onPasswordReset={this.props._passwordResetAsyncAction}
+          />
+          <RegistrationForm
+
+          />
+        </div>
     )
   }
 }
