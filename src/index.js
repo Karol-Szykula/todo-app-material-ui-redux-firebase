@@ -7,9 +7,13 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import './index.css'
 import App from './App'
 
+import { store } from './state/store'
+
 
 ReactDOM.render(
-    <Provider>
+    <Provider
+        store={store}
+    >
         <MuiThemeProvider>
             <App />
         </MuiThemeProvider>
