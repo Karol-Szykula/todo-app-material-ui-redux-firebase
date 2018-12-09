@@ -11,6 +11,7 @@ const LoginForms = (props) => (
     }}
   >
     <h2>Sign in!</h2>
+    <h4>(testing credentials: example@example.com, example)</h4>
     <TextField
       name="email"
       type="email"
