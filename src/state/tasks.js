@@ -26,10 +26,8 @@ export const deleteTask = (index) => ({
 const INITIAL_STATE = {
     tasks: [],
     newTaskText: '',
-    // visibleTasks: [],
     filterText: '',
     chosenFilter: 'All',
-
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -51,7 +49,14 @@ export default (state = INITIAL_STATE, action) => {
                 return state
             }
         case TOGGLE_TASK:
-            return {}
+            const allTasksWithToggled = state.tasks.map((task, index) => (index === action.index)
+                ? { ...task, completed: !task.completed }
+                : task
+            )
+            return {
+                ...state,
+                tasks: allTasksWithToggled
+            }
 
         case DELETE_TASK:
             return {}
