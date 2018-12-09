@@ -48,7 +48,6 @@ export const loadTasksFromDbAsyncAction = () => (dispatch, getState) => {
             dispatch(
                 saveTasksFromDbToState(JSON.parse(snapshot.val().tasks))
             )
-            console.log(JSON.parse(snapshot.val().tasks))
         }
     )
 }
