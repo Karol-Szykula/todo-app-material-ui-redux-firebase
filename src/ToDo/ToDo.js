@@ -2,6 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper'
+import RaisedButton from 'material-ui/RaisedButton'
 
 import AddTask from './AddTask'
 import List from './List'
@@ -15,7 +16,9 @@ import {
     chooseFilterAllAction,
     chooseFilterCompletedAction,
     chooseFilterUncompletedAction
-} from '../state/tasks';
+} from '../state/tasks'
+
+import { logOutAsyncAction } from '../state/auth'
 
 const style = {
     paper: {
@@ -29,6 +32,12 @@ const ToDo = (props) => (
     <Paper
         style={style.paper}
     >
+        <RaisedButton
+            label={'Sign out'}
+            primary={true}
+            onClick={props.logOut}
+            fullWidth={true}
+        />
         <AddTask
             newTaskText={props.newTaskText}
             onNewTaskTextChangeHandler={props.taskTextChange}
@@ -62,14 +71,18 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+
     addTask: () => dispatch(addTaskAsyncAction()),
     toggleTask: (taskKey) => dispatch(toggleTaskAsyncAction(taskKey)),
     deleteTask: (taskKey) => dispatch(deleteTaskAsyncAction(taskKey)),
     taskTextChange: (event) => dispatch(taskTextChangeAction(event.target.value)),
+
     filterTextChange: (event) => dispatch(filterTextChangeAction(event.target.value)),
     chooseFilterAllAction: () => dispatch(chooseFilterAllAction()),
     chooseFilterCompletedAction: () => dispatch(chooseFilterCompletedAction()),
     chooseFilterUncompletedAction: () => dispatch(chooseFilterUncompletedAction()),
+
+    logOut: () => dispatch(logOutAsyncAction())
 })
 
 export default connect(

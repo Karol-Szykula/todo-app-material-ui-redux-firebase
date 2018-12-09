@@ -1,10 +1,16 @@
 import { auth, database, googleProvider } from '../firebase'
 import { loadTasksFromDbAsyncAction } from './tasks'
 
+import validateEmail from '../utils/emailValidation'
+
 const LOG_IN = 'auth/LOG_IN'
 const LOG_OUT = 'auth/LOG_OUT'
 const EMAIL_CHANGE = 'auth/EMAIL_CHANGE'
 const PASSWORD_CHANGE = 'auth/PASSWORD_CHANGE'
+
+const REGISTRATION_EMAIL_CHANGE = 'auth/REGISTRATION_EMAIL_CHANGE'
+const REGISTRATION_PASSWORD_CHANGE = 'auth/REGISTRATION_PASSWORD_CHANGE'
+const CONFIRMED_REGISTRATION_PASSWORD_CHANGE = 'auth/CONFIRMED_REGISTRATION_PASSWORD_CHANGE'
 
 export const initAuthChangeListeningAsyncAction = () => (dispatch, getState) => {
     auth.onAuthStateChanged(
@@ -21,7 +27,20 @@ export const initAuthChangeListeningAsyncAction = () => (dispatch, getState) => 
 }
 
 export const signUpAsyncAction = () => (dispatch, getState) => {
-    // auth.
+    const email = getState().auth.registrationEmail
+    const regPass = getState().auth.registrationPassword
+    const conRegPass = getState().auth.confirmedRegistrationPassword
+
+    if (validateEmail(email) && regPass !== '' && (regPass === conRegPass)) {
+        auth.createUserWithEmailAndPassword(email, regPass)
+    } else if (!(validateEmail(email))) {
+        alert(`That is not a valid email adress`)
+    } else if (regPass !== conRegPass) {
+        alert(`Passwords doesn't match`)
+    } else {
+        alert(`Something went wrong`)
+    }
+
 }
 
 export const logOutAsyncAction = () => (dispatch, getState) => {
@@ -69,11 +88,29 @@ export const passwordChangeAction = newValue => ({
     newValue
 })
 
+export const registrationEmailChangeAction = newValue => ({
+    type: REGISTRATION_EMAIL_CHANGE,
+    newValue
+})
+
+export const registrationPasswordChangeAction = newValue => ({
+    type: REGISTRATION_PASSWORD_CHANGE,
+    newValue
+})
+
+export const confirmedRegistrationPasswordChange = newValue => ({
+    type: CONFIRMED_REGISTRATION_PASSWORD_CHANGE,
+    newValue
+})
+
 const INITIAL_STATE = {
     isUserLoggedIn: false,
     email: '',
     password: '',
-    user: null
+    user: null,
+    registrationEmail: '',
+    registrationPassword: '',
+    confirmedRegistrationPassword: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -100,6 +137,25 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 password: action.newValue
             }
+
+        case REGISTRATION_EMAIL_CHANGE:
+            return {
+                ...state,
+                registrationEmail: action.newValue
+            }
+
+        case REGISTRATION_PASSWORD_CHANGE:
+            return {
+                ...state,
+                registrationPassword: action.newValue
+            }
+
+        case CONFIRMED_REGISTRATION_PASSWORD_CHANGE:
+            return {
+                ...state,
+                confirmedRegistrationPassword: action.newValue
+            }
+
         default:
             return state
     }

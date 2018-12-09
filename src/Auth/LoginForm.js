@@ -10,7 +10,7 @@ const LoginForms = (props) => (
       padding: 20
     }}
   >
-    <h2>Log in!</h2>
+    <h2>Sign in!</h2>
     <TextField
       name="email"
       type="email"
@@ -29,14 +29,14 @@ const LoginForms = (props) => (
     />
     <RaisedButton
       style={{ margin: '5px 0' }}
-      label={'Log in'}
+      label={'Sign in'}
       primary={true}
       onClick={props.onLogInClick}
       fullWidth={true}
     />
     <RaisedButton
       style={{ margin: '5px 0' }}
-      label={'Log in by Google'}
+      label={'Sign in by Google'}
       secondary={true}
       onClick={props.onLogInByGoogleClick}
       fullWidth={true}

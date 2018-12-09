@@ -10,36 +10,36 @@ const RegistrationForm = (props) => (
             padding: 20
         }}
     >
-        <h2>Sign In!</h2>
+        <h2>Sign Up!</h2>
         <TextField
             name="email"
             type="email"
             floatingLabelText="E-mail"
-            value={props.email}
-            onChange={props.onEmailChangeHandler}
+            value={props.registrationEmail}
+            onChange={props.registrationEmailChangeHandler}
             fullWidth={true}
         />
         <TextField
             name="password"
             type="password"
             floatingLabelText="Password"
-            value={props.password}
-            onChange={props.onPasswordChangeHandler}
+            value={props.registrationPassword}
+            onChange={props.registrationPasswordChangeHandler}
             fullWidth={true}
         />
         <TextField
             name="confirmPassword"
             type="password"
             floatingLabelText="Confirm password"
-            // value={props.password}
-            // onChange={props.onPasswordChangeHandler}
+            value={props.confirmedRegistrationPassword}
+            onChange={props.confirmedRegistrationPasswordChangeHandler}
             fullWidth={true}
         />
         <RaisedButton
             style={{ margin: '5px 0' }}
             label={'Sign Up!'}
             primary={true}
-            onClick={props.onLogInClick}
+            onClick={props.onSignUpClick}
             fullWidth={true}
         />
     </Paper>

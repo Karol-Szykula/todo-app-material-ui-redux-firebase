@@ -45,9 +45,12 @@ export const loadTasksFromDbAsyncAction = () => (dispatch, getState) => {
     database.ref(`/users/${uuid}/`).once(
         'value',
         snapshot => {
-            dispatch(
-                saveTasksFromDbToState(JSON.parse(snapshot.val().tasks))
-            )
+            if (snapshot.val() !== null) {
+                const tasksFromDb = JSON.parse((snapshot.val().tasks))
+                dispatch(
+                    saveTasksFromDbToState(tasksFromDb)
+                )
+            }
         }
     )
 }
