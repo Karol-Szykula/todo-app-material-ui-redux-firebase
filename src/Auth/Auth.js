@@ -58,7 +58,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  // _initAuthChangeListeningAsyncAction: () => dispatch(initAuthChangeListeningAsyncAction()),
   _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction()),
   _logInAsyncAction: () => dispatch(logInAsyncAction()),
   _emailChangeAction: (event) => dispatch(emailChangeAction(event.target.value)),
