@@ -4,7 +4,6 @@ import LoginForm from './LoginForm'
 
 import { connect } from 'react-redux'
 import {
-  initAuthChangeListeningAsyncAction,
   logInByGoogleAsyncAction,
   logInAsyncAction,
   emailChangeAction,
@@ -17,45 +16,37 @@ import {
 } from '../state/auth'
 import RegistrationForm from './RegistrationForm';
 
-class Auth extends React.Component {
-  componentDidMount() {
-    this.props._initAuthChangeListeningAsyncAction()
-  }
+const Auth = (props) => (
+  this.props._isUserLoggedIn ?
+    <div>
+      {this.props.children}
+    </div>
+    :
+    <div>
+      <LoginForm
+        email={this.props._email}
+        onEmailChangeHandler={this.props._emailChangeAction}
+        password={this.props._password}
+        onPasswordChangeHandler={this.props._passwordChangeAction}
+        onLogInClick={this.props._logInAsyncAction}
+        onLogInByGoogleClick={this.props._logInByGoogleAsyncAction}
+        onPasswordReset={this.props._passwordResetAsyncAction}
+      />
+      <RegistrationForm
 
-  render() {
-    return (
-      this.props._isUserLoggedIn ?
-        <div>
-          {this.props.children}
-        </div>
-        :
-        <div>
-          <LoginForm
-            email={this.props._email}
-            onEmailChangeHandler={this.props._emailChangeAction}
-            password={this.props._password}
-            onPasswordChangeHandler={this.props._passwordChangeAction}
-            onLogInClick={this.props._logInAsyncAction}
-            onLogInByGoogleClick={this.props._logInByGoogleAsyncAction}
-            onPasswordReset={this.props._passwordResetAsyncAction}
-          />
-          <RegistrationForm
+        registrationEmail={this.props._registrationEmail}
+        registrationEmailChangeHandler={this.props._registrationEmailChangeAction}
 
-            registrationEmail={this.props._registrationEmail}
-            registrationEmailChangeHandler={this.props._registrationEmailChangeAction}
+        registrationPassword={this.props._registrationPassword}
+        registrationPasswordChangeHandler={this.props._registrationPasswordChangeAction}
 
-            registrationPassword={this.props._registrationPassword}
-            registrationPasswordChangeHandler={this.props._registrationPasswordChangeAction}
+        confirmedRegistrationPassword={this.props._confirmedRegistrationPassword}
+        confirmedRegistrationPasswordChangeHandler={this.props._confirmedRegistrationPasswordChange}
 
-            confirmedRegistrationPassword={this.props._confirmedRegistrationPassword}
-            confirmedRegistrationPasswordChangeHandler={this.props._confirmedRegistrationPasswordChange}
-
-            onSignUpClick={this.props._signUpAsyncAction}
-          />
-        </div>
-    )
-  }
-}
+        onSignUpClick={this.props._signUpAsyncAction}
+      />
+    </div>
+)
 
 const mapStateToProps = state => ({
   _isUserLoggedIn: state.auth.isUserLoggedIn,
@@ -67,7 +58,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  _initAuthChangeListeningAsyncAction: () => dispatch(initAuthChangeListeningAsyncAction()),
+  // _initAuthChangeListeningAsyncAction: () => dispatch(initAuthChangeListeningAsyncAction()),
   _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction()),
   _logInAsyncAction: () => dispatch(logInAsyncAction()),
   _emailChangeAction: (event) => dispatch(emailChangeAction(event.target.value)),

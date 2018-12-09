@@ -12,20 +12,6 @@ const REGISTRATION_EMAIL_CHANGE = 'auth/REGISTRATION_EMAIL_CHANGE'
 const REGISTRATION_PASSWORD_CHANGE = 'auth/REGISTRATION_PASSWORD_CHANGE'
 const CONFIRMED_REGISTRATION_PASSWORD_CHANGE = 'auth/CONFIRMED_REGISTRATION_PASSWORD_CHANGE'
 
-export const initAuthChangeListeningAsyncAction = () => (dispatch, getState) => {
-    auth.onAuthStateChanged(
-        user => {
-            if (user) {
-                dispatch(logInAction(user))
-                dispatch(saveLogInTimestampAsyncAction())
-                dispatch(loadTasksFromDbAsyncAction())
-            } else {
-                dispatch(logOutAction())
-            }
-        }
-    )
-}
-
 export const signUpAsyncAction = () => (dispatch, getState) => {
     const email = getState().auth.registrationEmail
     const regPass = getState().auth.registrationPassword
@@ -40,23 +26,48 @@ export const signUpAsyncAction = () => (dispatch, getState) => {
     } else {
         alert(`Something went wrong`)
     }
-
 }
 
 export const logOutAsyncAction = () => (dispatch, getState) => {
     auth.signOut()
+        .then(res => dispatch(logOutAction()))
 }
 
 export const logInByGoogleAsyncAction = () => (dispatch, getState) => {
     auth.signInWithPopup(googleProvider)
+        .then(res => {
+            dispatch(logInAction(res.user))
+            dispatch(saveLogInTimestampAsyncAction())
+            dispatch(loadTasksFromDbAsyncAction())
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                alert('Wrong password.')
+            } else {
+                alert(errorMessage)
+            }
+        })
 }
 
 export const logInAsyncAction = () => (dispatch, getState) => {
     const { auth: { email, password } } = getState()
 
     auth.signInWithEmailAndPassword(email, password)
-        .catch(error => {
-            alert('Wrong user name or password, try again.')
+        .then(res => {
+            dispatch(logInAction(res.user))
+            dispatch(saveLogInTimestampAsyncAction())
+            dispatch(loadTasksFromDbAsyncAction())
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                alert('Wrong password.');
+            } else {
+                alert(errorMessage);
+            }
         })
 }
 
