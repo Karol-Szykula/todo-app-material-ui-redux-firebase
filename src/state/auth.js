@@ -20,7 +20,6 @@ export const signUpAsyncAction = () => (dispatch, getState) => {
     if (validateEmail(email) && regPass !== '' && (regPass === conRegPass)) {
         auth.createUserWithEmailAndPassword(email, regPass)
             .then(res => {
-                // console.log(res)
                 dispatch(logInAction(res.user))
                 dispatch(saveLogInTimestampAsyncAction())
                 dispatch(loadTasksFromDbAsyncAction())
