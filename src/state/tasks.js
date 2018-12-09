@@ -7,18 +7,19 @@ export const addTask = (task) => ({
     task
 })
 
-export const toggleTask = () => ({
-    type: TOGGLE_TASK
+export const toggleTask = (index) => ({
+    type: TOGGLE_TASK,
+    index
 })
 
-export const deleteTask = (task) => ({
+export const deleteTask = (index) => ({
     type: DELETE_TASK,
-    task
+    index
 })
 
 const INITIAL_STATE = {
     tasks: [],
-    visibleTasks: [],
+    // visibleTasks: [],
     filterText: '',
     chosenFilter: 'All',
     newTaskText: ''

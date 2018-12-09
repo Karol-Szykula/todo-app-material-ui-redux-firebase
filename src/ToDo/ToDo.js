@@ -6,6 +6,11 @@ import Paper from 'material-ui/Paper'
 import AddTask from './AddTask'
 import List from './List'
 import Search from './Search'
+import {
+    addTask,
+    toggleTask,
+    deleteTask,
+} from '../state/tasks';
 
 const style = {
     paper: {
@@ -119,7 +124,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+    addTask: (event) => dispatch(addTask(event.target.value)),
+    toggleTask: (index) => dispatch(toggleTask(index)),
+    deleteTask: (index) => dispatch(deleteTask(index)),
 })
 
 export default connect(
