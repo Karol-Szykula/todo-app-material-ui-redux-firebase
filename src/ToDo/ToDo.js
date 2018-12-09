@@ -8,8 +8,8 @@ import List from './List'
 import Search from './Search'
 import {
     addTaskAsyncAction,
-    toggleTaskAction,
-    deleteTaskAction,
+    toggleTaskAsyncAction,
+    deleteTaskAsyncAction,
     taskTextChangeAction,
     filterTextChangeAction,
     chooseFilterAllAction,
@@ -63,8 +63,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     addTask: () => dispatch(addTaskAsyncAction()),
-    toggleTask: (taskKey) => dispatch(toggleTaskAction(taskKey)),
-    deleteTask: (taskKey) => dispatch(deleteTaskAction(taskKey)),
+    toggleTask: (taskKey) => dispatch(toggleTaskAsyncAction(taskKey)),
+    deleteTask: (taskKey) => dispatch(deleteTaskAsyncAction(taskKey)),
     taskTextChange: (event) => dispatch(taskTextChangeAction(event.target.value)),
     filterTextChange: (event) => dispatch(filterTextChangeAction(event.target.value)),
     chooseFilterAllAction: () => dispatch(chooseFilterAllAction()),
