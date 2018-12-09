@@ -10,6 +10,7 @@ import {
     addTask,
     toggleTask,
     deleteTask,
+    taskTextChange,
 } from '../state/tasks';
 
 const style = {
@@ -91,18 +92,18 @@ const ToDo = (props) => (
         style={style.paper}
     >
         <AddTask
-            // newTaskText={this.state.newTaskText}
-            // onNewTaskTextChangeHandler={this.onNewTaskTextChangeHandler}
+            newTaskText={props.newTaskText}
+            onNewTaskTextChangeHandler={props.taskTextChange}
             addTask={props.addTask}
         />
 
         <Search
-            // chosenFilter={this.state.chosenFilter}
-            // filterText={this.state.filterText}
-            // onFilterTextChangeHandler={this.onFilterTextChangeHandler}
-            // onAllClickHandler={this.onAllClickHandler}
-            // onCompletedClickHandler={this.onCompletedClickHandler}
-            // onUnCompletedClickHandler={this.onUnCompletedClickHandler}
+        // chosenFilter={this.state.chosenFilter}
+        // filterText={this.state.filterText}
+        // onFilterTextChangeHandler={this.onFilterTextChangeHandler}
+        // onAllClickHandler={this.onAllClickHandler}
+        // onCompletedClickHandler={this.onCompletedClickHandler}
+        // onUnCompletedClickHandler={this.onUnCompletedClickHandler}
         />
 
         <List
@@ -117,12 +118,14 @@ const ToDo = (props) => (
 
 const mapStateToProps = (state) => ({
     tasks: state.tasks.tasks,
+    newTaskText: state.tasks.newTaskText,
 })
 
 const mapDispatchToProps = (dispatch) => ({
     addTask: (event) => dispatch(addTask(event.target.value)),
     toggleTask: (index) => dispatch(toggleTask(index)),
     deleteTask: (index) => dispatch(deleteTask(index)),
+    taskTextChange: (event) => dispatch(taskTextChange(event.target.value))
 })
 
 export default connect(
