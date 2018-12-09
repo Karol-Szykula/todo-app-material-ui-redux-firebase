@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper'
 
 import AddTask from './AddTask'
@@ -113,4 +114,15 @@ class ToDo extends React.Component {
     }
 }
 
-export default ToDo
+const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ToDo)
