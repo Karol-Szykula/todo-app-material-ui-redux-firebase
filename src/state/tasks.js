@@ -1,26 +1,32 @@
-const ADD_TASK = 'todo/ADD_TASK'
-const DELETE_TASK = 'todo/DELETE_TASK'
-const TOGGLE_TASK = 'todo/TOGGLE_TASK'
-const TASK_TEXT_CHANGE = 'todo/TASK_TEXT_CHANGE'
+const ADD_TASK = 'tasks/ADD_TASK'
+const DELETE_TASK = 'tasks/DELETE_TASK'
+const TOGGLE_TASK = 'tasks/TOGGLE_TASK'
+const TASK_TEXT_CHANGE = 'tasks/TASK_TEXT_CHANGE'
 
-export const taskTextChange = (newText) => ({
+const FILTER_TEXT_CHANGE = 'tasks/FILTER_TEXT_CHANGE'
+
+export const filterTextChangeAction = (newFilter) => ({
+    type: FILTER_TEXT_CHANGE,
+    newFilter
+})
+
+export const taskTextChangeAction = (newText) => ({
     type: TASK_TEXT_CHANGE,
     newText
 })
 
-export const addTask = (task) => ({
+export const addTaskAction = () => ({
     type: ADD_TASK,
-    task
 })
 
-export const toggleTask = (index) => ({
+export const toggleTaskAction = (taskKey) => ({
     type: TOGGLE_TASK,
-    index
+    taskKey
 })
 
-export const deleteTask = (index) => ({
+export const deleteTaskAction = (taskKey) => ({
     type: DELETE_TASK,
-    index
+    taskKey
 })
 
 const INITIAL_STATE = {
@@ -49,26 +55,33 @@ export default (state = INITIAL_STATE, action) => {
                 return state
             }
         case TOGGLE_TASK:
-            const allTasksWithToggled = state.tasks.map((task, index) => (index === action.index)
-                ? { ...task, completed: !task.completed }
-                : task
-            )
+            const allTasksWithToggled = state.tasks.map((task) => (
+                (task.key === action.taskKey)
+                    ? { ...task, isCompleted: !task.isCompleted }
+                    : task
+            ))
             return {
                 ...state,
                 tasks: allTasksWithToggled
             }
 
         case DELETE_TASK:
-            const allTasksWithDeleted = state.tasks.filter((task, index) => !(index === action.index))
+            const allTasksWithDeleted = state.tasks.filter((task) => !(task.key === action.taskKey))
             return {
                 ...state,
-                allTasks: allTasksWithDeleted
+                tasks: allTasksWithDeleted
             }
 
         case TASK_TEXT_CHANGE:
             return {
                 ...state,
                 newTaskText: action.newText
+            }
+
+        case FILTER_TEXT_CHANGE:
+            return {
+                ...state,
+                filterText: action.newFilter
             }
 
 

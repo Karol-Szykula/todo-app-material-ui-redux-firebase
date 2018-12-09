@@ -7,10 +7,11 @@ import AddTask from './AddTask'
 import List from './List'
 import Search from './Search'
 import {
-    addTask,
-    toggleTask,
-    deleteTask,
-    taskTextChange,
+    addTaskAction,
+    toggleTaskAction,
+    deleteTaskAction,
+    taskTextChangeAction,
+    filterTextChangeAction,
 } from '../state/tasks';
 
 const style = {
@@ -107,8 +108,8 @@ const ToDo = (props) => (
         />
 
         <List
-            // filterText={this.state.filterText}
-            // chosenFilter={this.state.chosenFilter}
+            filterText={props.filterText}
+            chosenFilter={props.chosenFilter}
             tasksList={props.tasks}
             toggleTask={props.toggleTask}
             deleteTask={props.deleteTask}
@@ -119,13 +120,16 @@ const ToDo = (props) => (
 const mapStateToProps = (state) => ({
     tasks: state.tasks.tasks,
     newTaskText: state.tasks.newTaskText,
+    filterText: state.tasks.filterText,
+    chosenFilter: state.tasks.chosenFilter,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    addTask: (event) => dispatch(addTask(event.target.value)),
-    toggleTask: (index) => dispatch(toggleTask(index)),
-    deleteTask: (index) => dispatch(deleteTask(index)),
-    taskTextChange: (event) => dispatch(taskTextChange(event.target.value))
+    addTask: () => dispatch(addTaskAction()),
+    toggleTask: (index) => dispatch(toggleTaskAction(index)),
+    deleteTask: (index) => dispatch(deleteTaskAction(index)),
+    taskTextChange: (event) => dispatch(taskTextChangeAction(event.target.value)),
+    filterTextChange: (event) => dispatch(filterTextChangeAction(event.target.value))
 })
 
 export default connect(
