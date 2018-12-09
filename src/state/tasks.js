@@ -19,10 +19,10 @@ export const deleteTask = (index) => ({
 
 const INITIAL_STATE = {
     tasks: [],
+    newTaskText: '',
     // visibleTasks: [],
     filterText: '',
     chosenFilter: 'All',
-    newTaskText: ''
 
 }
 
