@@ -1,14 +1,14 @@
 ##Demo version
 
 [http://todo-app-redux.karol-szykula.surge.sh/](http://todo-app-redux.karol-szykula.surge.sh/)
-This app was created as a homework project on infoShare Academy Junior Front-end developer course.
--it uses firebase database to save tasks,
--it is possible to sign in with google account,
--it is possible to register an account with email and passsword,
--tasks can be mark completed or uncompleted,
--tasks can be filtered by text,
--tasks can be filtered by all, completed or uncompleted
--application uses react, redux and material-ui
+This app was created as a homework project on infoShare Academy Junior Front-end developer course. \n
+-it uses firebase database to save tasks,\n
+-it is possible to sign in with google account,\n
+-it is possible to register an account with email and passsword,\n
+-tasks can be mark completed or uncompleted,\n
+-tasks can be filtered by text,\n
+-tasks can be filtered by all, completed or uncompleted\n
+-application uses react, redux and material-ui\n
 
 ## Available Scripts
 
