@@ -59,10 +59,17 @@ export default (state = INITIAL_STATE, action) => {
             }
 
         case DELETE_TASK:
-            return {}
+            const allTasksWithDeleted = state.tasks.filter((task, index) => !(index === action.index))
+            return {
+                ...state,
+                allTasks: allTasksWithDeleted
+            }
 
         case TASK_TEXT_CHANGE:
-            return {}
+            return {
+                ...state,
+                newTaskText: action.newText
+            }
 
 
         default:
