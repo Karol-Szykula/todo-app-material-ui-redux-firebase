@@ -1,7 +1,7 @@
 const ADD_TASK = 'todo/ADD_TASK'
 const DELETE_TASK = 'todo/DELETE_TASK'
 const TOGGLE_TASK = 'todo/TOGGLE_TASK'
-const TASK_TEXT_CHANGE = 'todo/TOGGLE_TASK'
+const TASK_TEXT_CHANGE = 'todo/TASK_TEXT_CHANGE'
 
 export const taskTextChange = (newText) => ({
     type: TASK_TEXT_CHANGE,

@@ -109,7 +109,7 @@ const ToDo = (props) => (
         <List
             // filterText={this.state.filterText}
             // chosenFilter={this.state.chosenFilter}
-            // tasksList={this.state.tasks}
+            tasksList={props.tasks}
             toggleTask={props.toggleTask}
             deleteTask={props.deleteTask}
         />
