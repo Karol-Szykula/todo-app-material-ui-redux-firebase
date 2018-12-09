@@ -17,33 +17,33 @@ import {
 import RegistrationForm from './RegistrationForm';
 
 const Auth = (props) => (
-  this.props._isUserLoggedIn ?
+  props._isUserLoggedIn ?
     <div>
-      {this.props.children}
+      {props.children}
     </div>
     :
     <div>
       <LoginForm
-        email={this.props._email}
-        onEmailChangeHandler={this.props._emailChangeAction}
-        password={this.props._password}
-        onPasswordChangeHandler={this.props._passwordChangeAction}
-        onLogInClick={this.props._logInAsyncAction}
-        onLogInByGoogleClick={this.props._logInByGoogleAsyncAction}
-        onPasswordReset={this.props._passwordResetAsyncAction}
+        email={props._email}
+        onEmailChangeHandler={props._emailChangeAction}
+        password={props._password}
+        onPasswordChangeHandler={props._passwordChangeAction}
+        onLogInClick={props._logInAsyncAction}
+        onLogInByGoogleClick={props._logInByGoogleAsyncAction}
+        onPasswordReset={props._passwordResetAsyncAction}
       />
       <RegistrationForm
 
-        registrationEmail={this.props._registrationEmail}
-        registrationEmailChangeHandler={this.props._registrationEmailChangeAction}
+        registrationEmail={props._registrationEmail}
+        registrationEmailChangeHandler={props._registrationEmailChangeAction}
 
-        registrationPassword={this.props._registrationPassword}
-        registrationPasswordChangeHandler={this.props._registrationPasswordChangeAction}
+        registrationPassword={props._registrationPassword}
+        registrationPasswordChangeHandler={props._registrationPasswordChangeAction}
 
-        confirmedRegistrationPassword={this.props._confirmedRegistrationPassword}
-        confirmedRegistrationPasswordChangeHandler={this.props._confirmedRegistrationPasswordChange}
+        confirmedRegistrationPassword={props._confirmedRegistrationPassword}
+        confirmedRegistrationPasswordChangeHandler={props._confirmedRegistrationPasswordChange}
 
-        onSignUpClick={this.props._signUpAsyncAction}
+        onSignUpClick={props._signUpAsyncAction}
       />
     </div>
 )
