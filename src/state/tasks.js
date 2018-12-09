@@ -36,8 +36,20 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
 
         case ADD_TASK:
-            return {}
-
+            if (state.newTaskText !== '') {
+                const newTask = {
+                    taskText: state.newTaskText,
+                    isCompleted: false,
+                    key: Date.now()
+                }
+                return {
+                    ...state,
+                    tasks: [...state.tasks, newTask]
+                }
+            }
+            else {
+                return state
+            }
         case TOGGLE_TASK:
             return {}
 
