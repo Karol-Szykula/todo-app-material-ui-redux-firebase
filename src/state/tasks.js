@@ -1,3 +1,5 @@
+import { database } from '../firebase'
+
 const ADD_TASK = 'tasks/ADD_TASK'
 const DELETE_TASK = 'tasks/DELETE_TASK'
 const TOGGLE_TASK = 'tasks/TOGGLE_TASK'
@@ -7,6 +9,18 @@ const FILTER_TEXT_CHANGE = 'tasks/FILTER_TEXT_CHANGE'
 const CHOOSE_FILTER_ALL = 'tasks/CHOOSE_FILTER_ALL'
 const CHOOSE_FILTER_COMPLETED = 'tasks/CHOOSE_FILTER_COMPLETED'
 const CHOOSE_FILTER_UNCOMPLETED = 'tasks/CHOOSE_FILTER_UNCOMPLETED'
+
+// const dbRef = database.ref()
+
+export const addTaskAsyncAction = () => (dispatch, getState) => {
+    dispatch(addTaskAction())
+
+    const uuid = getState().auth.user.uid
+    database.ref(`/users/${uuid}/tasks`).set({
+        tasks: JSON.stringify(getState().tasks.tasks)
+    })
+
+}
 
 export const chooseFilterAllAction = () => ({
     type: CHOOSE_FILTER_ALL

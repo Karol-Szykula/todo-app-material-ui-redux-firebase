@@ -18,7 +18,7 @@ export const initAuthChangeListeningAsyncAction = () => (dispatch, getState) => 
     )
 }
 
-export const signInAsyncAction = () => (dispatch, getState) => {
+export const signUpAsyncAction = () => (dispatch, getState) => {
     // auth.
 }
 

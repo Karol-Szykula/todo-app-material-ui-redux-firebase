@@ -7,7 +7,7 @@ import AddTask from './AddTask'
 import List from './List'
 import Search from './Search'
 import {
-    addTaskAction,
+    addTaskAsyncAction,
     toggleTaskAction,
     deleteTaskAction,
     taskTextChangeAction,
@@ -62,7 +62,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    addTask: () => dispatch(addTaskAction()),
+    addTask: () => dispatch(addTaskAsyncAction()),
     toggleTask: (taskKey) => dispatch(toggleTaskAction(taskKey)),
     deleteTask: (taskKey) => dispatch(deleteTaskAction(taskKey)),
     taskTextChange: (event) => dispatch(taskTextChangeAction(event.target.value)),
