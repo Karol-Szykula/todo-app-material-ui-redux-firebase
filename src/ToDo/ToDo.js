@@ -12,6 +12,9 @@ import {
     deleteTaskAction,
     taskTextChangeAction,
     filterTextChangeAction,
+    chooseFilterAllAction,
+    chooseFilterCompletedAction,
+    chooseFilterUncompletedAction
 } from '../state/tasks';
 
 const style = {
@@ -99,12 +102,12 @@ const ToDo = (props) => (
         />
 
         <Search
-        // chosenFilter={this.state.chosenFilter}
-        // filterText={this.state.filterText}
-        // onFilterTextChangeHandler={this.onFilterTextChangeHandler}
-        // onAllClickHandler={this.onAllClickHandler}
-        // onCompletedClickHandler={this.onCompletedClickHandler}
-        // onUnCompletedClickHandler={this.onUnCompletedClickHandler}
+            chosenFilter={props.chosenFilter}
+            filterText={props.filterText}
+            onFilterTextChangeHandler={props.filterTextChange}
+            onAllClickHandler={props.chooseFilterAllAction}
+            onCompletedClickHandler={props.chooseFilterCompletedAction}
+            onUnCompletedClickHandler={props.chooseFilterUncompletedAction}
         />
 
         <List
@@ -126,10 +129,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     addTask: () => dispatch(addTaskAction()),
-    toggleTask: (index) => dispatch(toggleTaskAction(index)),
-    deleteTask: (index) => dispatch(deleteTaskAction(index)),
+    toggleTask: (taskKey) => dispatch(toggleTaskAction(taskKey)),
+    deleteTask: (taskKey) => dispatch(deleteTaskAction(taskKey)),
     taskTextChange: (event) => dispatch(taskTextChangeAction(event.target.value)),
-    filterTextChange: (event) => dispatch(filterTextChangeAction(event.target.value))
+    filterTextChange: (event) => dispatch(filterTextChangeAction(event.target.value)),
+    chooseFilterAllAction: () => dispatch(chooseFilterAllAction()),
+    chooseFilterCompletedAction: () => dispatch(chooseFilterCompletedAction()),
+    chooseFilterUncompletedAction: () => dispatch(chooseFilterUncompletedAction()),
 })
 
 export default connect(

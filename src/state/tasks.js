@@ -4,6 +4,21 @@ const TOGGLE_TASK = 'tasks/TOGGLE_TASK'
 const TASK_TEXT_CHANGE = 'tasks/TASK_TEXT_CHANGE'
 
 const FILTER_TEXT_CHANGE = 'tasks/FILTER_TEXT_CHANGE'
+const CHOOSE_FILTER_ALL = 'tasks/CHOOSE_FILTER_ALL'
+const CHOOSE_FILTER_COMPLETED = 'tasks/CHOOSE_FILTER_COMPLETED'
+const CHOOSE_FILTER_UNCOMPLETED = 'tasks/CHOOSE_FILTER_UNCOMPLETED'
+
+export const chooseFilterAllAction = () => ({
+    type: CHOOSE_FILTER_ALL
+})
+
+export const chooseFilterCompletedAction = () => ({
+    type: CHOOSE_FILTER_COMPLETED
+})
+
+export const chooseFilterUncompletedAction = () => ({
+    type: CHOOSE_FILTER_UNCOMPLETED
+})
 
 export const filterTextChangeAction = (newFilter) => ({
     type: FILTER_TEXT_CHANGE,
@@ -33,7 +48,7 @@ const INITIAL_STATE = {
     tasks: [],
     newTaskText: '',
     filterText: '',
-    chosenFilter: 'All',
+    chosenFilter: 'ALL',
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -46,6 +61,7 @@ export default (state = INITIAL_STATE, action) => {
                     isCompleted: false,
                     key: Date.now()
                 }
+                state.newTaskText = ''
                 return {
                     ...state,
                     tasks: [...state.tasks, newTask]
@@ -82,6 +98,24 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 filterText: action.newFilter
+            }
+
+        case CHOOSE_FILTER_ALL:
+            return {
+                ...state,
+                chosenFilter: 'ALL'
+            }
+
+        case CHOOSE_FILTER_COMPLETED:
+            return {
+                ...state,
+                chosenFilter: 'COMPLETED'
+            }
+
+        case CHOOSE_FILTER_UNCOMPLETED:
+            return {
+                ...state,
+                chosenFilter: 'UNCOMPLETED'
             }
 
 
