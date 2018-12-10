@@ -3,6 +3,7 @@ import { database } from '../firebase'
 const ADD_TASK = 'tasks/ADD_TASK'
 const DELETE_TASK = 'tasks/DELETE_TASK'
 const TOGGLE_TASK = 'tasks/TOGGLE_TASK'
+const CLEAR_ALL_TASKS = 'tasks/CLEAR_ALL_TASKS'
 
 const SAVE_TASKS_FROM_DB_TO_STATE = 'tasks/SAVE_TASKS_FROM_DB_TO_STATE'
 const TASK_TEXT_CHANGE = 'tasks/TASK_TEXT_CHANGE'
@@ -42,17 +43,19 @@ export const deleteTaskAsyncAction = (taskKey) => (dispatch, getState) => {
 export const loadTasksFromDbAsyncAction = () => (dispatch, getState) => {
     const uuid = getState().auth.user.uid
 
-    database.ref(`/users/${uuid}/`).once(
-        'value',
-        snapshot => {
-            if (snapshot.val() !== null) {
-                const tasksFromDb = JSON.parse((snapshot.val().tasks))
-                dispatch(
-                    saveTasksFromDbToState(tasksFromDb)
-                )
+    if (uuid !== null) {
+        database.ref(`/users/${uuid}/`).once(
+            'value',
+            snapshot => {
+                if (snapshot.val() !== null) {
+                    const tasksFromDb = JSON.parse((snapshot.val().tasks))
+                    dispatch(
+                        saveTasksFromDbToState(tasksFromDb)
+                    )
+                }
             }
-        }
-    )
+        )
+    }
 }
 
 const saveTasksFromDbToState = (tasks) => ({
@@ -94,6 +97,10 @@ export const toggleTaskAction = (taskKey) => ({
 export const deleteTaskAction = (taskKey) => ({
     type: DELETE_TASK,
     taskKey
+})
+
+export const clearAllTasks = () => ({
+    type: CLEAR_ALL_TASKS
 })
 
 const INITIAL_STATE = {
@@ -138,6 +145,12 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 tasks: allTasksWithDeleted
+            }
+
+        case CLEAR_ALL_TASKS:
+            return {
+                ...state,
+                tasks: []
             }
 
         case SAVE_TASKS_FROM_DB_TO_STATE:

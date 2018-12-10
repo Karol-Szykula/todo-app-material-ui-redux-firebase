@@ -1,5 +1,5 @@
 import { auth, database, googleProvider } from '../firebase'
-import { loadTasksFromDbAsyncAction } from './tasks'
+import { loadTasksFromDbAsyncAction, clearAllTasks } from './tasks'
 
 import validateEmail from '../utils/emailValidation'
 
@@ -35,7 +35,11 @@ export const signUpAsyncAction = () => (dispatch, getState) => {
 
 export const logOutAsyncAction = () => (dispatch, getState) => {
     auth.signOut()
-        .then(res => dispatch(logOutAction()))
+        .then(
+            res => {
+                dispatch(logOutAction())
+                dispatch(clearAllTasks())
+            })
 }
 
 export const logInByGoogleAsyncAction = () => (dispatch, getState) => {
