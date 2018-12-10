@@ -1,14 +1,7 @@
 import React from 'react'
 
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-
-
-const style = {
-    button: {
-        margin: 12
-    }
-}
+import RaisedButton from 'material-ui/RaisedButton'
+import TextField from 'material-ui/TextField'
 
 const AddTask = (props) => (
     <div >
