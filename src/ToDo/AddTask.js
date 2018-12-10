@@ -24,7 +24,7 @@ const AddTask = (props) => (
             primary={true}
             onClick={props.addTask}
             label={'Add task'}
-            style={style.button}
+            // style={style.button}
             fullWidth={true}
         />
     </div>

@@ -22,7 +22,8 @@ import { logOutAsyncAction } from '../state/auth'
 
 const style = {
     paper: {
-        margin: 20
+        margin: 20,
+        padding: 20,
     }
 }
 
