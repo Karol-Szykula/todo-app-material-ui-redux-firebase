@@ -14,9 +14,10 @@ const style = {
 }
 
 const Task = (props) => (
-    <ListItem>
+    <ListItem
+        onClick={() => props.toggleTask(props.task.key)}
+    >
         <span
-            onClick={() => props.toggleTask(props.task.key)}
             style={props.task.isCompleted ? completedStyle : {}}
         >
             {props.task.taskText}
